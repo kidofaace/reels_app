@@ -1,6 +1,7 @@
 # reel_app
 
-A new Flutter project.
+This app needs some UI detailing but this the first time of me using firebase.
+it was a good challenge for me but i didn't get enough time for this app because i had other college work to do i hope this gets accepted
 
 ## Getting Started
 
