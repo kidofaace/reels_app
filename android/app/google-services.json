@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "333252868845",
+    "firebase_url": "https://reels-app-69c90-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "reels-app-69c90",
+    "storage_bucket": "reels-app-69c90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333252868845:android:69ddb96ff74262528f2ae4",
+        "android_client_info": {
+          "package_name": "com.example.reel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333252868845-jit5mv5059ip5o28jtfdnoh7so035qpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvVwHfqPUHaZlRtdoo7-PuHu9Qd9zPIAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333252868845-jit5mv5059ip5o28jtfdnoh7so035qpj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333252868845:android:4acbc384e3691fe28f2ae4",
+        "android_client_info": {
+          "package_name": "com.example.reels"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333252868845-jit5mv5059ip5o28jtfdnoh7so035qpj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvVwHfqPUHaZlRtdoo7-PuHu9Qd9zPIAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333252868845-jit5mv5059ip5o28jtfdnoh7so035qpj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
