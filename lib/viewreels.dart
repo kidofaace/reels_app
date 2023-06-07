@@ -41,7 +41,7 @@ class _ReelsPageState extends State<ReelsPage> {
 
     List<Reel> fetchedReels = snapshot.docs.map((doc) {
       return Reel(
-        uid: doc.id, // Store the document ID
+        uid: doc.id, // Storing the document ID
         videoUrl: doc['videoUrl'],
         title: doc['title'],
         description: doc['description'],
@@ -82,7 +82,7 @@ class _ReelsPageState extends State<ReelsPage> {
       videoPlayerController: _videoController,
       autoPlay: false,
       looping: true,
-      // Additional options can be set here, such as video aspect ratio, placeholder, etc.
+
     );
 
     bool _isPlaying = false;
