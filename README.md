@@ -5,7 +5,11 @@ it was a good challenge for me but i didn't get enough time for this app because
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This app takes phone Number authentication for login.
+and then  
+the user can upload reels to it with having a description and a title for it
+and then watch it.
+there is also a like button fot it if the ther user likes it
 
 A few resources to get you started if this is your first Flutter project:
 
