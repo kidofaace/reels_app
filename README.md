@@ -10,6 +10,8 @@ and then
 the user can upload reels to it with having a description and a title for it
 and then watch it.
 there is also a like button fot it if the ther user likes it
+message also pops up when the number is invalid  or otp is invalid
+the user stays logged in until he/she logs out 
 
 A few resources to get you started if this is your first Flutter project:
 
