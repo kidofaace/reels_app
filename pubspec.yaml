@@ -49,6 +49,7 @@ dependencies:
   video_trimmer: ^2.1.0
   file_picker: ^5.3.2
   chewie: ^1.5.0
+  pagination_view: ^2.0.0
 
 dependency_overrides:
   win32: ^5.0.0

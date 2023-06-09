@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:reel_app/splash.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoUploadScreen extends StatefulWidget {
@@ -64,6 +65,7 @@ class _VideoUploadScreenState extends State<VideoUploadScreen> {
       _videoDescription = null;
       _videoLikes = 0;
     });
+
 
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Video uploaded successfully')));
     Navigator.pop(context);

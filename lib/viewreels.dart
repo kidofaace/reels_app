@@ -2,6 +2,8 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:video_player/video_player.dart';
+import 'model_class.dart';
+import 'package:pagination_view/pagination_view.dart';
 
 class ReelsPage extends StatefulWidget {
   const ReelsPage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _ReelsPageState extends State<ReelsPage> {
   late List<Reel> _reels;
   late bool _isLoading;
   late bool _isFetching;
-  late PageController _pageController;
+
 
   @override
   void initState() {
@@ -22,33 +24,37 @@ class _ReelsPageState extends State<ReelsPage> {
     _reels = [];
     _isLoading = true;
     _isFetching = false;
-    _pageController = PageController();
     _fetchReels();
   }
 
-  void _fetchReels() async {
+  Future<void> _fetchReels() async {
     if (_isFetching) return;
+
     setState(() {
       _isFetching = true;
     });
-    // fetching the video(reel)
+
+    // Simulating API call delay
     await Future.delayed(const Duration(seconds: 2));
+
     QuerySnapshot snapshot = await FirebaseFirestore.instance
         .collection('videos')
         .orderBy('time')
-        .limit(10)
+        .limit(2)
         .get();
 
     List<Reel> fetchedReels = snapshot.docs.map((doc) {
       return Reel(
-        uid: doc.id, // Storing the document ID
-        videoUrl: doc['videoUrl'],
-        title: doc['title'],
-        description: doc['description'],
-        time: (doc['time'] as Timestamp).toDate(),
-        likes: doc['likes'],
+          uid: doc.id,
+          videoUrl: doc['videoUrl'],
+          title: doc['title'],
+          description: doc['description'],
+          likes: doc['likes'],
+          time: doc['time']
+
       );
     }).toList();
+
     setState(() {
       _isLoading = false;
       _isFetching = false;
@@ -57,8 +63,8 @@ class _ReelsPageState extends State<ReelsPage> {
   }
 
   void _handleLike(Reel reel) async {
-    final docRef =
-        FirebaseFirestore.instance.collection('videos').doc(reel.uid);
+    final docRef = FirebaseFirestore.instance.collection('videos').doc(
+        reel.uid);
 
     if (reel.isLiked) {
       setState(() {
@@ -76,13 +82,12 @@ class _ReelsPageState extends State<ReelsPage> {
   }
 
   Widget _buildReelItem(Reel reel) {
-    VideoPlayerController _videoController =
-        VideoPlayerController.network(reel.videoUrl!);
+    VideoPlayerController _videoController = VideoPlayerController.network(
+        reel.videoUrl!);
     ChewieController _chewieController = ChewieController(
       videoPlayerController: _videoController,
-      autoPlay: false,
-      looping: true,
-
+      autoPlay: true,
+      looping: false,
     );
 
     bool _isPlaying = false;
@@ -97,9 +102,6 @@ class _ReelsPageState extends State<ReelsPage> {
         } else {
           _videoController.pause();
         }
-      },
-      onLongPress: () {
-        // TODO: Handle video pause and toggle title/description visibility
       },
       child: Stack(
         children: [
@@ -163,37 +165,29 @@ class _ReelsPageState extends State<ReelsPage> {
         title: const Text('Reels'),
       ),
       body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : PageView.builder(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              itemCount: _reels.length,
-              itemBuilder: (context, index) {
-                return _buildReelItem(_reels[index]);
-              },
-            ),
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : PaginationView<Reel>(
+        pageFetch: _fetchReels,
+
+        itemBuilder: (BuildContext context, Reel reel, int index) {
+          return _buildReelItem(reel);
+        },
+        onEmpty
+        :Center(
+          child: SnackBar(content: Text('Error'),),
+        ),
+        onError: (dynamic error) {
+          return Center(
+            child: Text('Error: $error'),
+          );
+        },
+        paginationViewType: PaginationViewType.listView,
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        pullToRefresh: true,
+      ),
     );
   }
-}
-
-class Reel {
-  final String uid; // Add document ID property
-  final String? videoUrl;
-  final String? title;
-  final String? description;
-  final DateTime? time;
-  int likes;
-  bool isLiked;
-
-  Reel({
-    required this.uid, // Include document ID in the constructor
-    required this.videoUrl,
-    required this.title,
-    required this.description,
-    required this.time,
-    this.likes = 0,
-    this.isLiked = false,
-  });
 }
